@@ -6,5 +6,5 @@ A simple project which has to emulate a layer of sensors detecting a particle ra
 * We have a detector 1m away from the source, consisting 5 planar sensors with a distance of 10cm and a surface area of 1x1m 
 * The sensor has a resolution of 25 * 10^-6 m
 ## Sensors
-There are indeed different ways of implementing how exactly a sensor of some detector layer should behave. One of such reasons is for example the multihood of 
-interpretations for the word "RESOLUTION" in the context of plasma physics. So multiple approaches are taken, each approach assuming some sort of sensor geometry. The two main geometries in this simulation will be the square geometry and the circle geometry. This is due to the various optimizations such geometries allow.
+>There are indeed different ways of implementing how exactly a sensor of some detector layer should behave. One of such reasons is for example the multihood of 
+>interpretations for the word "RESOLUTION" in the context of plasma physics. So multiple approaches are taken, each approach assuming some sort of sensor geometry. The >two main geometries in this simulation will be the square geometry and the circle geometry. This is due to the various optimizations such geometries allow.
