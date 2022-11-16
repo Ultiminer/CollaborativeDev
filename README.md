@@ -8,4 +8,4 @@
 >* The sensor has a resolution of 25 * 10^-6 m
 >## Sensors
 >There are indeed different ways of implementing how exactly a sensor of some detector layer should behave. One of such reasons is for example the multihood of 
->interpretations for the word "RESOLUTION" in the context of plasma physics. So multiple approaches are taken, each approach assuming some sort of sensor geometry. The >two main geometries in this simulation will be the square geometry and the circle geometry. This is due to the various optimizations such geometries allow.
+>interpretations for the word "RESOLUTION" in the context of plasma physics. So multiple approaches are taken, each approach assuming some sort of sensor geometry. The two main geometries in this simulation will be the square geometry and the circle geometry. This is due to the various optimizations such geometries allow.
