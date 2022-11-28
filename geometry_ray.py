@@ -1,6 +1,7 @@
 import numpy as np
 import scipy as sc
 from config import config
+from random import *
 
 class vector(object):
     def __init__(self, x ,y, z):
@@ -32,10 +33,20 @@ class vector(object):
     
 class ray(object):
     def __init__(self):
-        self.x = config['source']['x']
-        self.y = config['source']['x']
-        self.z = config['source']['x']
-        self._vec_cl = vector()#
+        # source position
+        self.x_s = config['source']['x']
+        self.y_s = config['source']['y']
+        self.z_s = config['source']['z']
+        # detector position
+        self.x_d = config['detector_pos']['x']
+        self.y_d = config['detector_pos']['y']
+        self.z_d = config['detector_pos']['z']
+        # detector layer specs
+        self.l_w = config['detector_geo']['layer_width']        
+        self.l_d = config['detector_geo']['layer_dist']
+        self.l_h = config['detector_geo']['layer_height']        
+        
+        self._vec_cl = vector()  # dont know yet what to do with this
         self._direction = self._vec_cl.norm_vec(self.random_vector())
 
 
@@ -46,34 +57,18 @@ class ray(object):
         and normalize it with norm_vec ---> normalized ray
         """
         
-        return 0
+        
+        x = uniform(0, 1)
+        y = uniform(0, 1)
+        z = uniform(0, 1)
+
+        return (x, y, z)
     
     def propagate_fun(self):
         """
         Takes the random_vector propagates the ray to the detector
         with the geometry 
         """
-        return 0
-    
-class detector(object):
-    def __init__(self):
-        self._no_lay = config['detector_geo']['no_layer']
-        self._width = config['detector_geo']['layer_width']
-        self._height = config['detector_geo']['layer_height']
-        self._pos_x = config['detector_pos']['x']
-        self._pos_y = config['detector_pos']['y']
-        self._pos_z = config['detector_pos']['z']
-        self._dete_dist = config['detector_geo']['layer_dist']
-    
-    def clamp():
-        """
-        simulation to more realistic scenario
-        takes : error defined
-        returns : a more realistic detection point
-        """
-        return 0
-
-    def project_to_layer():
         return 0
 
 

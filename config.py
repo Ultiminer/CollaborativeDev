@@ -25,6 +25,7 @@ _baseconfig = {
         'y': 1,
         'z': 1,
     },
+
     'detector_geo': {
         'no_layers' : 1,
         'layer_width' : 2,
@@ -37,32 +38,6 @@ _baseconfig = {
 
     'detector_char' : {
         'resolution' : 5e-6
-    },
-
-    "general": {
-        # Random state seed
-        "random state seed": 1337,
-        # Output level
-        'debug level': logging.ERROR,
-        # Location of logging file handler
-        "log file handler": "../run/pdm.log",
-        # Dump experiment config to this location
-        "config location": "../run/config.txt",
-        "detector": ["IceCube",   "POne", 'combined'],
-        "pone type": ["new", "old"],
-        "year": range(0, 10),
-        'density': ['NFW', 'Burkert'],
-        "channel": ["W", "\[Tau]", "b", "All", "\\[Nu]\\[Mu]", "\\[Nu]\\[Tau]",
-                    "\\[Nu]e"],
-    },
-
-    "simulation parameters": {
-        "mass grid": np.logspace(2, 6, 9),
-        "sv grid": np.logspace(-26, -21, 9),
-        "uptime": 10 * 365 * 24 * 60 * 60,
-        "low energy cutoff": 5e2,  # GeV
-        "high energy cutoff": 5e6,  # GeV
-        "DM type k": 2
     },
 
 }
