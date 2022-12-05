@@ -3,8 +3,7 @@
 //Getting lists
 #include <vector>
 //Getting basic mathematics
-#include <gcem.hpp>
-
+#include <math.h>
 
 //Assume that 1=1 cm
 
@@ -93,7 +92,7 @@ class Layer
     const Point3D layerPos;
     //The source of all rays
     const Point3D raySource;
-    //the length - width AND height - of aour layer
+    //the length - width AND height - of our layer
     const float length;
     //the diameter of a singular sensor
     const float sensorDist;
@@ -135,30 +134,18 @@ class Layer
     }
 
     //How the layer would detect a ray assuming square sensors - BOOLEAN DETECTION
-    constexpr Point2D DetectRaySquareSensor(const Ray3D& ray)
+    inline Point2D DetectRaySquareSensor(const Ray3D& ray)
     {
         const Point2D perfectP{RayOnLayer(ray)};
         /*We first of all crop the perfectP to the sensor edge it is collding with
         using the modulo (fmod) function*/
-        const Point2D sensorEdge{perfectP.x-gcem::fmod(perfectP.x,sensorDist),perfectP.y-gcem::fmod(perfectP.y,sensorDist)};
+        const Point2D sensorEdge{perfectP.x-fmod(perfectP.x,sensorDist),perfectP.y-fmod(perfectP.y,sensorDist)};
 
         //And then shift the sensor Edge to the middle point of the sensor
         return {sensorEdge.x+sensorDist/2, sensorEdge.y+sensorDist/2};
     }
 
-    //How the layer would detect a ray assuming circular sensors - BOOLEAN DETECTION
-    constexpr Point2D DetectRayCircleSensor(const Ray3D& ray)
-    {
-        //We first of all calculate the middle point of the sensor
-        const Point2D middleSensor{DetectRaySquareSensor(ray)};
-
-        //And also fetch the perfectP again
-        const Point2D perfectP{RayOnLayer(ray)};
-
-        /*We now compare the distance of the ray to the sensor to check if it should be detected
-        in case of no detection we return the NANPOINT*/
-        return (squaredist(middleSensor,perfectP)>square(sensorDist/2))? NANPOINT2D : middleSensor;
-    }
+    
     public:
     //Caching in a list of rays assumign square sensors
     void CacheRaySquareSensors(const std::vector<Ray3D>& Rays)
@@ -167,15 +154,6 @@ class Layer
             detectedPoints.push_back(DetectRaySquareSensor(ray));
     }
 
-    //Caching in a list of rays assumign circular sensors
-    void CacheRayCircularSensors(const std::vector<Ray3D>& Rays)
-    {
-        for(auto ray: Rays)
-        {
-            const Point2D toCache{DetectRayCircleSensor(ray)};
-            if(!(toCache==NANPOINT2D))detectedPoints.push_back(toCache);
-        }
-    }
 };
 
 
