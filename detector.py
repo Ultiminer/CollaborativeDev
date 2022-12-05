@@ -12,6 +12,11 @@ class detector(object):
         self._pos_z = config['detector_pos']['z']
         self._dete_dist = config['detector_geo']['layer_dist']
     
+
+
+
+
+    
     def clamp():
         """
         simulation to more realistic scenario

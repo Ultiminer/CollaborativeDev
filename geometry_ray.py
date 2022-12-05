@@ -45,7 +45,7 @@ class ray(object):
         self.l_w = config['detector_geo']['layer_width']        
         self.l_d = config['detector_geo']['layer_dist']
         self.l_h = config['detector_geo']['layer_height']        
-        
+        self._no_det = config['detector_geo']['no_layers']
         self._vec_cl = vector()  # dont know yet what to do with this
         self._direction = self._vec_cl.norm_vec(self.random_vector())
 
@@ -53,23 +53,32 @@ class ray(object):
     def random_vector(self):
         """
         It makes use of random fun_ to generate a point 
-        and apply vector_class_fun to omit a ray
-        and normalize it with norm_vec ---> normalized ray
+        to omit a ray
+        Returns:
+        theta, phi
         """
-        
-        
-        x = uniform(0, 1)
-        y = uniform(0, 1)
-        z = uniform(0, 1)
+        x_w = self.l_w / 2
 
-        return (x, y, z)
+        s_d = self.z_d + ((self._no_det - 1) * self.l_d)
+        theta_max = np.arctan(x_w / s_d)
+
+        theta = uniform(-theta_max, theta_max)
+        phi = uniform(-theta_max, theta_max)
+
+        return theta, phi
     
-    def propagate_fun(self):
+    def ray_collision_layer(self, layer_no, theta, phi):
         """
         Takes the random_vector propagates the ray to the detector
-        with the geometry 
+        with the geometry to a layer_no defined from 1 to 5 
         """
-        return 0
+        r = (self.z_d + (layer_no - 1) * self.l_d ) / np.cos(phi)
+
+        x = r * np.cos(theta) * np.sin(phi)
+        y = r * np.sin(theta) * np.sin(phi)
+
+        return x, y
+
 
 
     

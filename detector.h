@@ -61,7 +61,7 @@ typedef Point3D Ray3D;
 //dotproduct of points aka. vectors
 constexpr float dotprod(const Point2D& a, const Point2D& b)
 {
-    return a.x*b.x+a.y*b.y;
+    return a.x*b.x + a.y*b.y;
 }
 constexpr float dotprod(const Point3D& a, const Point3D& b)
 {
