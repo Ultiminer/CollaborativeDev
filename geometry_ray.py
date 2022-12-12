@@ -23,7 +23,6 @@ class ray(object):
         self.resol = config['detector_char']['resolution']
         self.detectedPoints=[]
         self.raysource = (self.x_s, self.y_s, self.z_s)
-        self.self.l_w
         
 
         self.layerpos = (self.x_d, self.y_d, self.z_d)
@@ -42,7 +41,7 @@ class ray(object):
 
         x = uniform(-self.l_w/2, self.l_w/2)
         y = uniform(-self.l_h/2, self.l_h/2)
-        z = self.z_d+ self.z_l
+        z = self.z_d + self.l_d 
         
         norm = x**2 + y**2 + (z)**2
         
@@ -58,7 +57,7 @@ class ray(object):
         
         return
         ----------------
-        position substract the edge of the layer
+        position substract the edge of the
         """
         z_l = (self.z_d + (layer_no - 1) * self.l_d )
         multiplier = z_l / r_vec[2]
@@ -74,7 +73,7 @@ class ray(object):
         layerpoint 
         """
         
-        if layerPoint[0]<0 or layerPoint[1] < 0 or layerPoint[0]>self.l_w or layerPoint[1] > self.l_h:
+        if layerPoint[0]>self.l_w or layerPoint[1] > self.l_h:
             return (np.NaN, np.NaN, np.NaN)
         #We first of all crop the perfectP to the sensor edge it is collding with
         #using the modulo (fmod) function

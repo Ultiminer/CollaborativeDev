@@ -27,18 +27,17 @@ _baseconfig = {
     },
 
     'detector_geo': {
-        'no_layers' : 1,
-        'layer_width' : 2,
-        'layer_height' : 2,
-        'layer_dist' : 2,        
+        'no_layers' : 6,
+        'layer_width' : 1,
+        'layer_height' : 1,
+        'layer_dist' : 1,        
     },
     'particle_char' : {
         'speed_const' : 1,
     },
 
     'detector_char' : {
-        '
-        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++' : 5e-6
+        'resolution': 25e-6,
     },
     'simulation parameter':{
         'no sim' : 1
