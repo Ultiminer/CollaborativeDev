@@ -3,33 +3,6 @@ from scipy import interpolate as ip
 from config import config
 from random import *
 
-class vector(object):
-    def __init__(self, x ,y, z):
-        self.x = x
-        self.y = y
-        self.z = z
-
-    def dot_product(v_1, v_2):
-        return v_1*v_2
-    
-    def cross_product(v_1, v_2):
-        return v_1*v_2
-
-    def square_dist(v_1, v_2):
-            return v_1*v_2
-
-    def norm_vec(v_1):
-        return v_1/(v_1)
-
-    def projection(v_1, v_2):
-        return 0
-    
-    def arg():
-        """
-        Takes : the width and height 
-        returns : angle 
-        """
-        return 0
     
 class ray(object):
     def __init__(self):
@@ -47,7 +20,6 @@ class ray(object):
         self.l_h = config['detector_geo']['layer_height']        
         self._no_det = config['detector_geo']['no_layers']
 
-        self._direction = self._vec_cl.norm_vec(self.random_vector())
         self.resol = config['detector_char']['resolution']
         self.detectedPoints=[]
         self.raysource = (self.x_s, self.y_s, self.z_s)
@@ -83,6 +55,10 @@ class ray(object):
         parameter
         ----------------------
         parameter
+        
+        return
+        ----------------
+        position substract the edge of the layer
         """
         z_l = (self.z_d + (layer_no - 1) * self.l_d )
         multiplier = z_l / r_vec[2]
@@ -94,12 +70,19 @@ class ray(object):
 
     #How the layer would detect a ray assuming square sensors - BOOLEAN DETECTION
     def DetectRaySquareSensor(self, layerPoint):
-    
+        """
+        layerpoint 
+        """
+        
+        if layerPoint[0]<0 or layerPoint[1] < 0 or layerPoint[0]>self.l_w or layerPoint[1] > self.l_h:
+            return (np.NaN, np.NaN, np.NaN)
         #We first of all crop the perfectP to the sensor edge it is collding with
         #using the modulo (fmod) function
+        
         sensorEdge = (layerPoint[0]-(layerPoint[0] % self.resol),
                       layerPoint[1]- (layerPoint[1] % self.resol)
                      )
+
 
         #And then shift the sensor Edge to the middle point of the sensor
         return (sensorEdge[0] + self.resol/2, sensorEdge[1] + self.resol/2, layerPoint[2])
