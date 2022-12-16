@@ -84,7 +84,7 @@ class ray(object):
 
 
         #And then shift the sensor Edge to the middle point of the sensor
-        return (sensorEdge[0] + self.resol/2, sensorEdge[1] + self.resol/2, layerPoint[2])
+        return tuple(np.add((sensorEdge[0] + self.resol/2, sensorEdge[1] + self.resol/2, layerPoint[2]),self.edgeUL))
     
 
 

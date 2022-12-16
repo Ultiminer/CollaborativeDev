@@ -29,7 +29,7 @@ class simulation(object):
         dete_data = []
         for ray in rays:
             tmp_dete_data = []
-            for i in range(self.layer_no):
+            for i in (range(1,self.layer_no)):
                 layerpoint = self.coll_layer(i, ray)
                 #stores the collison data
                 tmp_dete_data.append(self.dete_ray_square(layerpoint))
@@ -59,11 +59,13 @@ class simulation(object):
         track_data = []
         for i, ray in enumerate(rays_list):
             id_nan = np.argwhere(np.isnan(dete_data[i]))
-            dete_data[i]=dete_data[i][:id_nan[0][0]]
-            if len(dete_data[i])<2:
-                track_data.append(np.nan)
-                print('%f ray no. does not hit two detectors' % (i))
-                continue
+            if id_nan is None:
+                for j,_ in enumerate(range(1, self.layer_no)):
+                    dete_data[i][j] = dete_data[i][j][:id_nan[0][0]]
+                    if len(dete_data[i])<2:
+                        track_data.append(np.nan)
+                        print('%f ray no. does not hit two detectors' % (i))
+                        continue
             dir = self.fitting.direction_fitting(dete_data[i])
             track_data.append(dir)
 
