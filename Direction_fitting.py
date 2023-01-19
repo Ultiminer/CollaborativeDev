@@ -31,13 +31,13 @@ class fitting(object):
         x = data_array[:,0]
         y = data_array[:,1]
         z = data_array[:,2]
-        model = np.polyfit(x, y, 1)
+        model = np.polyfit(z, x, 1)
+        e_x = model[0]
+        model = np.polyfit(z, y, 1)
         e_y = model[0]
-        model = np.polyfit(x, z, 1)
-        e_z = model[0]
-        vector_3d = [1,e_y,e_z]
+        vector_3d = [e_x,e_y,1]
         vector_3d/np.linalg.norm(vector_3d)
-        c_3d_polar = self.convert3dtopolar(vector_3d)
-        return c_3d_polar
+        #c_3d_polar = self.convert3dtopolar(vector_3d)
+        return vector_3d
 
 

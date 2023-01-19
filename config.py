@@ -40,7 +40,7 @@ _baseconfig = {
         'resolution': 25e-6,
     },
     'simulation parameter':{
-        'no sim' : 100
+        'no sim' : 5
     }
 
 }
