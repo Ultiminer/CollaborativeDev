@@ -28,9 +28,9 @@ class simulation(object):
         
         """
         dete_data = []
-        for ray in rays:
+        for i in (range(1,self.layer_no)):
             tmp_dete_data = []
-            for i in (range(1,self.layer_no)):
+            for ray in rays:
                 layerpoint = self.coll_layer(i, ray)
                 #stores the collison data
                 tmp_dete_data.append(self.dete_ray_square(layerpoint))
@@ -59,6 +59,9 @@ class simulation(object):
         the track_direction_data is calculated using the direction fitting 
         """
         track_data = []
+        for l_i,l in enumerate(self.layer_no):
+            dete_data[l_i][dete_data[l_i][:,0].sort()]
+            
         for i, ray in enumerate(rays_list):
             id_nan = np.argwhere(np.isnan(dete_data[i]))
             if id_nan is None:
